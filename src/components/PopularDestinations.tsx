@@ -1,7 +1,23 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { ChevronLeft, ChevronRight, MapPin } from 'lucide-react';
 
 const PopularDestinations: React.FC = () => {
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+  const scroll = (direction: 'left' | 'right') => {
+    if (scrollContainerRef.current) {
+      const scrollAmount = 320; // width of one card plus gap
+      const currentScroll = scrollContainerRef.current.scrollLeft;
+      const targetScroll = direction === 'left' 
+        ? currentScroll - scrollAmount 
+        : currentScroll + scrollAmount;
+      
+      scrollContainerRef.current.scrollTo({
+        left: targetScroll,
+        behavior: 'smooth'
+      });
+    }
+  };
   const destinations = [
     {
       id: 1,
@@ -58,11 +74,14 @@ const PopularDestinations: React.FC = () => {
         </div>
 
         <div className="relative">
-          <div className="flex overflow-x-auto scrollbar-hide space-x-6 pb-4">
+          <div 
+            ref={scrollContainerRef}
+            className="flex overflow-x-auto scrollbar-hide space-x-6 pb-4 scroll-smooth"
+          >
             {destinations.map((destination) => (
               <div
                 key={destination.id}
-                className="flex-none w-80 bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow cursor-pointer group"
+                className="flex-none w-72 sm:w-80 bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow cursor-pointer group"
               >
                 <div className="relative h-48 overflow-hidden">
                   <img
@@ -92,10 +111,18 @@ const PopularDestinations: React.FC = () => {
           </div>
 
           {/* Navigation Arrows */}
-          <button className="absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-4 bg-white rounded-full p-2 shadow-lg hover:shadow-xl transition-shadow">
+          <button 
+            onClick={() => scroll('left')}
+            className="absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-4 bg-white rounded-full p-2 shadow-lg hover:shadow-xl transition-shadow z-10"
+            title="Scroll left"
+          >
             <ChevronLeft className="w-5 h-5 text-gray-600" />
           </button>
-          <button className="absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-4 bg-white rounded-full p-2 shadow-lg hover:shadow-xl transition-shadow">
+          <button 
+            onClick={() => scroll('right')}
+            className="absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-4 bg-white rounded-full p-2 shadow-lg hover:shadow-xl transition-shadow z-10"
+            title="Scroll right"
+          >
             <ChevronRight className="w-5 h-5 text-gray-600" />
           </button>
         </div>

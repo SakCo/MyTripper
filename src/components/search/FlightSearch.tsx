@@ -58,7 +58,7 @@ const FlightSearch: React.FC<FlightSearchProps> = ({ onSearch }) => {
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
         {/* From/To Section */}
-        <div className="lg:col-span-5 grid grid-cols-1 md:grid-cols-2 gap-4 relative">
+        <div className="lg:col-span-5 grid grid-cols-1 sm:grid-cols-2 gap-4 relative">
           <div className="relative">
             <label className="block text-sm font-medium text-gray-700 mb-2">From</label>
             <div className="relative">
@@ -68,7 +68,7 @@ const FlightSearch: React.FC<FlightSearchProps> = ({ onSearch }) => {
                 value={searchData.from}
                 onChange={(e) => setSearchData(prev => ({ ...prev, from: e.target.value }))}
                 placeholder="Departure city"
-                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all"
+                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all text-black"
               />
             </div>
           </div>
@@ -82,7 +82,7 @@ const FlightSearch: React.FC<FlightSearchProps> = ({ onSearch }) => {
                 value={searchData.to}
                 onChange={(e) => setSearchData(prev => ({ ...prev, to: e.target.value }))}
                 placeholder="Destination city"
-                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all"
+                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all text-black"
               />
             </div>
           </div>
@@ -90,14 +90,24 @@ const FlightSearch: React.FC<FlightSearchProps> = ({ onSearch }) => {
           {/* Swap Button */}
           <button
             onClick={handleSwapCities}
-            className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 bg-white border-2 border-gray-300 rounded-full p-2 hover:border-green-500 hover:text-green-600 transition-all hidden md:block"
+            className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 bg-white border-2 border-gray-300 rounded-full p-2 hover:border-green-500 hover:text-green-600 transition-all hidden sm:block"
+            title="Swap cities"
           >
             <ArrowRightLeft className="w-4 h-4" />
+          </button>
+
+          {/* Mobile Swap Button */}
+          <button
+            onClick={handleSwapCities}
+            className="sm:hidden w-full mt-2 p-2 text-gray-600 hover:text-green-600 border border-gray-300 rounded-lg hover:border-green-500 transition-all flex items-center justify-center space-x-2"
+          >
+            <ArrowRightLeft className="w-4 h-4" />
+            <span className="text-sm">Swap</span>
           </button>
         </div>
 
         {/* Dates Section */}
-        <div className="lg:col-span-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="lg:col-span-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">Departure</label>
             <div className="relative">
@@ -106,7 +116,8 @@ const FlightSearch: React.FC<FlightSearchProps> = ({ onSearch }) => {
                 type="date"
                 value={searchData.departure}
                 onChange={(e) => setSearchData(prev => ({ ...prev, departure: e.target.value }))}
-                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all"
+                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all text-black"
+                title="Select departure date"
               />
             </div>
           </div>
@@ -120,7 +131,8 @@ const FlightSearch: React.FC<FlightSearchProps> = ({ onSearch }) => {
                   type="date"
                   value={searchData.return}
                   onChange={(e) => setSearchData(prev => ({ ...prev, return: e.target.value }))}
-                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all"
+                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all text-black"
+                  title="Select return date"
                 />
               </div>
             </div>
@@ -136,7 +148,8 @@ const FlightSearch: React.FC<FlightSearchProps> = ({ onSearch }) => {
               <select
                 value={searchData.passengers}
                 onChange={(e) => setSearchData(prev => ({ ...prev, passengers: Number(e.target.value) }))}
-                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all appearance-none"
+                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all appearance-none text-black"
+                title="Select number of passengers"
               >
                 {[1, 2, 3, 4, 5, 6].map(num => (
                   <option key={num} value={num}>{num}</option>
@@ -150,7 +163,8 @@ const FlightSearch: React.FC<FlightSearchProps> = ({ onSearch }) => {
             <select
               value={searchData.class}
               onChange={(e) => setSearchData(prev => ({ ...prev, class: e.target.value }))}
-              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all appearance-none"
+              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all appearance-none text-black"
+              title="Select travel class"
             >
               <option value="economy">Economy</option>
               <option value="premium">Premium</option>

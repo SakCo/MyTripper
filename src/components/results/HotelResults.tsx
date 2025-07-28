@@ -8,7 +8,7 @@ interface HotelResultsProps {
   sortBy: string;
 }
 
-const HotelResults: React.FC<HotelResultsProps> = ({ query, filters, sortBy }) => {
+const HotelResults: React.FC<HotelResultsProps> = ({ query, filters: _filters, sortBy: _sortBy }) => {
   // Mock hotel data
   const hotels: Hotel[] = [
     {
@@ -79,9 +79,9 @@ const HotelResults: React.FC<HotelResultsProps> = ({ query, filters, sortBy }) =
 
       {hotels.map((hotel) => (
         <div key={hotel.id} className="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-shadow">
-          <div className="flex">
+          <div className="flex flex-col md:flex-row">
             {/* Hotel Image */}
-            <div className="w-64 h-48 flex-shrink-0">
+            <div className="w-full md:w-64 h-48 md:h-48 flex-shrink-0">
               <img
                 src={hotel.image}
                 alt={hotel.name}
@@ -90,11 +90,11 @@ const HotelResults: React.FC<HotelResultsProps> = ({ query, filters, sortBy }) =
             </div>
 
             {/* Hotel Details */}
-            <div className="flex-1 p-6">
-              <div className="flex items-start justify-between h-full">
-                <div className="flex-1">
-                  <div className="flex items-center space-x-2 mb-2">
-                    <h3 className="text-xl font-bold text-gray-900">{hotel.name}</h3>
+            <div className="flex-1 p-4 sm:p-6">
+              <div className="flex flex-col md:flex-row md:items-start md:justify-between h-full">
+                <div className="flex-1 mb-4 md:mb-0">
+                  <div className="flex flex-col sm:flex-row sm:items-center space-y-2 sm:space-y-0 sm:space-x-2 mb-2">
+                    <h3 className="text-lg sm:text-xl font-bold text-gray-900">{hotel.name}</h3>
                     <div className="flex items-center">
                       {[...Array(5)].map((_, i) => (
                         <Star
@@ -112,10 +112,13 @@ const HotelResults: React.FC<HotelResultsProps> = ({ query, filters, sortBy }) =
                     </div>
                   </div>
 
-                  <div className="flex items-center space-x-1 text-gray-600 mb-3">
-                    <MapPin className="w-4 h-4" />
-                    <span className="text-sm">{hotel.location}</span>
-                    <span className="text-sm">• {hotel.distance}</span>
+                  <div className="flex flex-col sm:flex-row sm:items-center space-y-1 sm:space-y-0 sm:space-x-1 text-gray-600 mb-3">
+                    <div className="flex items-center space-x-1">
+                      <MapPin className="w-4 h-4" />
+                      <span className="text-sm">{hotel.location}</span>
+                    </div>
+                    <span className="text-sm hidden sm:inline">•</span>
+                    <span className="text-sm">{hotel.distance}</span>
                   </div>
 
                   <div className="flex flex-wrap gap-2 mb-4">
@@ -135,7 +138,7 @@ const HotelResults: React.FC<HotelResultsProps> = ({ query, filters, sortBy }) =
                     )}
                   </div>
 
-                  <div className="flex items-center space-x-4">
+                  <div className="flex flex-col sm:flex-row sm:items-center space-y-2 sm:space-y-0 sm:space-x-4">
                     <button className="text-green-600 hover:text-green-700 text-sm font-medium">
                       View on Map
                     </button>
@@ -146,18 +149,20 @@ const HotelResults: React.FC<HotelResultsProps> = ({ query, filters, sortBy }) =
                 </div>
 
                 {/* Price and Book */}
-                <div className="text-right ml-6">
-                  <div className="mb-4">
-                    <p className="text-2xl font-bold text-gray-900">${hotel.price}</p>
+                <div className="mt-4 md:mt-0 md:text-right md:ml-6 flex md:flex-col justify-between md:justify-start items-end md:items-end">
+                  <div className="mb-2 md:mb-4">
+                    <p className="text-xl md:text-2xl font-bold text-gray-900">${hotel.price}</p>
                     <p className="text-sm text-gray-500">per night</p>
                     <p className="text-xs text-gray-400">+ taxes & fees</p>
                   </div>
-                  <button className="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition-colors font-medium w-full mb-2">
-                    Book Now
-                  </button>
-                  <button className="border border-gray-300 text-gray-700 px-6 py-2 rounded-lg hover:bg-gray-50 transition-colors font-medium w-full text-sm">
-                    Save Hotel
-                  </button>
+                  <div className="flex flex-col space-y-2 w-full md:w-auto min-w-[120px]">
+                    <button className="bg-green-600 text-white px-4 md:px-6 py-2 rounded-lg hover:bg-green-700 transition-colors font-medium w-full">
+                      Book Now
+                    </button>
+                    <button className="border border-gray-300 text-gray-700 px-4 md:px-6 py-2 rounded-lg hover:bg-gray-50 transition-colors font-medium w-full text-sm">
+                      Save Hotel
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>

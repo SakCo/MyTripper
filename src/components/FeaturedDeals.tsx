@@ -78,19 +78,19 @@ const FeaturedDeals: React.FC = () => {
   };
 
   return (
-    <section className="py-16 bg-white">
-      <div className="max-w-7xl mx-auto px-4">
-        <div className="text-center mb-12">
+    <section className="py-12 sm:py-16 bg-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-8 sm:mb-12">
           <div className="flex items-center justify-center space-x-2 mb-4">
-            <Percent className="w-8 h-8 text-green-600" />
-            <h2 className="text-3xl font-bold text-gray-900">Featured Deals</h2>
+            <Percent className="w-6 sm:w-8 h-6 sm:h-8 text-green-600" />
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">Featured Deals</h2>
           </div>
-          <p className="text-gray-600 max-w-2xl mx-auto">
+          <p className="text-gray-600 max-w-2xl mx-auto px-4">
             Limited-time offers on flights, hotels, and vacation packages. Book now and save big!
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
           {deals.map((deal) => (
             <div
               key={deal.id}

@@ -19,7 +19,7 @@ const HotelSearch: React.FC<HotelSearchProps> = ({ onSearch }) => {
   };
 
   return (
-    <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6">
+    <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-4 sm:p-6">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
         {/* Destination */}
         <div className="lg:col-span-4">
@@ -31,13 +31,13 @@ const HotelSearch: React.FC<HotelSearchProps> = ({ onSearch }) => {
               value={searchData.destination}
               onChange={(e) => setSearchData(prev => ({ ...prev, destination: e.target.value }))}
               placeholder="Where are you going?"
-              className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all"
+              className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all text-black"
             />
           </div>
         </div>
 
         {/* Check-in/Check-out */}
-        <div className="lg:col-span-4 grid grid-cols-2 gap-4">
+        <div className="lg:col-span-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">Check-in</label>
             <div className="relative">
@@ -46,7 +46,8 @@ const HotelSearch: React.FC<HotelSearchProps> = ({ onSearch }) => {
                 type="date"
                 value={searchData.checkin}
                 onChange={(e) => setSearchData(prev => ({ ...prev, checkin: e.target.value }))}
-                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all"
+                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all text-black"
+                title="Select check-in date"
               />
             </div>
           </div>
@@ -59,7 +60,8 @@ const HotelSearch: React.FC<HotelSearchProps> = ({ onSearch }) => {
                 type="date"
                 value={searchData.checkout}
                 onChange={(e) => setSearchData(prev => ({ ...prev, checkout: e.target.value }))}
-                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all"
+                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all text-black"
+                title="Select check-out date"
               />
             </div>
           </div>
@@ -74,7 +76,8 @@ const HotelSearch: React.FC<HotelSearchProps> = ({ onSearch }) => {
               <select
                 value={searchData.guests}
                 onChange={(e) => setSearchData(prev => ({ ...prev, guests: Number(e.target.value) }))}
-                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all appearance-none"
+                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all appearance-none text-black"
+                title="Select number of guests"
               >
                 {[1, 2, 3, 4, 5, 6, 7, 8].map(num => (
                   <option key={num} value={num}>{num}</option>
@@ -90,7 +93,8 @@ const HotelSearch: React.FC<HotelSearchProps> = ({ onSearch }) => {
               <select
                 value={searchData.rooms}
                 onChange={(e) => setSearchData(prev => ({ ...prev, rooms: Number(e.target.value) }))}
-                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all appearance-none"
+                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all appearance-none text-black"
+                title="Select number of rooms"
               >
                 {[1, 2, 3, 4, 5].map(num => (
                   <option key={num} value={num}>{num}</option>

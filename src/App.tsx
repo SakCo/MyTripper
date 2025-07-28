@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Header from './components/Header';
 import SearchTabs from './components/SearchTabs';
 import FlightSearch from './components/search/FlightSearch';
@@ -38,6 +38,35 @@ function App() {
     setCurrentView('home');
   };
 
+  const handleNavigateToSection = (section: string) => {
+    // Always navigate to home view first
+    if (currentView !== 'home') {
+      setCurrentView('home');
+    }
+    
+    // Handle different navigation types
+    if (section === 'flights' || section === 'hotels' || section === 'cars') {
+      // Set active tab for search functionality
+      setActiveTab(section);
+      
+      // For all search types (flights, hotels, cars), scroll to the search section
+      setTimeout(() => {
+        const element = document.getElementById('flights'); // Search section ID
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    } else if (section === 'deals') {
+      // For deals, scroll to deals section without changing active tab
+      setTimeout(() => {
+        const element = document.getElementById('deals');
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    }
+  };
+
   const renderCurrentView = () => {
     switch (currentView) {
       case 'results':
@@ -58,19 +87,19 @@ function App() {
         return (
           <>
             {/* Hero Section */}
-            <section className="bg-gradient-to-br from-green-600 via-green-700 to-green-800 text-white">
-              <div className="max-w-7xl mx-auto px-4 pt-16 pb-24">
+            <section id="flights" className="bg-gradient-to-br from-green-600 via-green-700 to-green-800 text-white">
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-24">
                 <div className="text-center mb-12">
-                  <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+                  <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold mb-6 leading-tight">
                     Find & Book Your Perfect Trip
                   </h1>
-                  <p className="text-xl md:text-2xl text-green-100 max-w-3xl mx-auto">
+                  <p className="text-lg sm:text-xl md:text-2xl text-green-100 max-w-3xl mx-auto px-4">
                     Compare prices from hundreds of travel sites and book flights, hotels, and cars at the best rates
                   </p>
                 </div>
 
                 {/* Search Container */}
-                <div className="max-w-6xl mx-auto">
+                <div className="max-w-6xl mx-auto px-4">
                   <SearchTabs activeTab={activeTab} onTabChange={setActiveTab} />
                   
                   <div className="transform transition-all duration-300">
@@ -88,8 +117,12 @@ function App() {
               </div>
             </section>
 
+            <div id="hotels"></div>
+            <div id="cars"></div>
             <PopularDestinations />
-            <FeaturedDeals />
+            <div id="deals">
+              <FeaturedDeals />
+            </div>
             <TravelGuides />
           </>
         );
@@ -103,6 +136,7 @@ function App() {
         onAuthClick={() => setShowAuthModal(true)}
         onDashboard={handleDashboard}
         onHome={handleHome}
+        onNavigateToSection={handleNavigateToSection}
       />
       
       {renderCurrentView()}
